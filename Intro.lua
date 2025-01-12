@@ -1,15 +1,17 @@
+wait(5)
+
 local player = game:GetService('Players').LocalPlayer
 local ScPlayer = player.PlayerGui
 local TweenService = game:GetService("TweenService")
 local camera = game.Workspace.CurrentCamera
-local SoundServiceIntro = Instance.new('Sound')
-SoundServiceIntro.SoundId = 'rbxassetid://6112625298'
-SoundServiceIntro.Volume = 1
-SoundServiceIntro.Parent = ScreenGui
 local ScreenGui = Instance.new('ScreenGui')
 ScreenGui.Parent = ScPlayer
 ScreenGui.Name = 'Intro'
 ScreenGui.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+local SoundServiceIntro = Instance.new('Sound')
+SoundServiceIntro.SoundId = 'rbxassetid://1842057457'
+SoundServiceIntro.Volume = 1
+SoundServiceIntro.Parent = ScreenGui
 local LabelText = Instance.new('Frame')
 LabelText.Size = UDim2.new(1, 0,1, 0)
 LabelText.Position = UDim2.new(0.5, 0,0.5, 0)
@@ -38,21 +40,28 @@ local tweenInfo = TweenInfo.new(
 	false,
 	0
 )
-
+local tweenInfo2 = TweenInfo.new(
+	0.3, 
+	Enum.EasingStyle.Quad,
+	Enum.EasingDirection.Out, 
+	0,
+	false,
+	0
+)
 
 local textTweenIncrease = TweenService:Create(introText, tweenInfo, {TextStrokeTransparency = 0, TextTransparency = 0})
 local blurTweenIncrease = TweenService:Create(blurEffect, tweenInfo, {Size = 24 })
 
 
-local textTweenDecrease = TweenService:Create(introText, tweenInfo, {	TextStrokeTransparency = 1, TextTransparency = 1})
-local blurTweenDecrease = TweenService:Create(blurEffect, tweenInfo, {Size = 0})
+local textTweenDecrease = TweenService:Create(introText, tweenInfo2, {	TextStrokeTransparency = 1, TextTransparency = 1})
+local blurTweenDecrease = TweenService:Create(blurEffect, tweenInfo2, {Size = 0})
 
 textTweenIncrease:Play()
 blurTweenIncrease:Play()
 SoundServiceIntro:Play()
-wait(2)
+wait(2.5)
 textTweenDecrease:Play()
 blurTweenDecrease:Play()
-wait(2)
+wait(0.5)
 LabelText:Destroy()
 blurEffect:Destroy()
