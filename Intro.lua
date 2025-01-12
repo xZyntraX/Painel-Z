@@ -26,6 +26,13 @@ introText.BackgroundTransparency = 1
 introText.TextStrokeTransparency = 1
 introText.Font = Enum.Font.SourceSansBold
 
+local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCore("SendNotification", {
+	Title = "Zyntra",
+	Text = "Script Executed!",
+	Duration = 5
+})
+
 local blurEffect = Instance.new("BlurEffect")
 blurEffect.Parent = camera
 blurEffect.Size = 0  
