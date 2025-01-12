@@ -1,5 +1,3 @@
-wait(5)
-
 local player = game:GetService('Players').LocalPlayer
 local ScPlayer = player.PlayerGui
 local TweenService = game:GetService("TweenService")
