@@ -13,7 +13,6 @@ local SoundServiceNegado = Instance.new('Sound')
 SoundServiceNegado.SoundId = 'rbxassetid://117707413130343'
 SoundServiceNegado.Volume = 0.5
 SoundServiceNegado.Parent = ScreenGui
-SoundServiceNegado.Name = 'SoundServiceNegado'
 
 local ColorPadron = Color3.new(0.333333, 0, 1)
 
@@ -105,11 +104,28 @@ end)
 
 
 ButtonPN1.MouseButton1Click:Connect(function()
+	local StarterGui = game:GetService("StarterGui")
 	if TextBox1.Text == User1 and TextBox2.Text == Pass1  then
 		print('Success')
+		StarterGui:SetCore("SendNotification", {
+			Title = "Warning!",
+			Text = "Thank you for using Zyntra :)",
+			Duration = 5
+		})
 		LoginOn = true
-	else
+	elseif TextBox1.Text == '' or TextBox2.Text == ''  then
 		SoundServiceNegado:Play()
+		StarterGui:SetCore("SendNotification", {
+			Title = "Warning!",
+			Text = "It looks like one of the fields is empty!",
+			Duration = 5
+		})
+	else
+		StarterGui:SetCore("SendNotification", {
+			Title = "Warning!",
+			Text = "Incorrect username or password!",
+			Duration = 5
+		})
 	end
 end)
 
