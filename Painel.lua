@@ -10,9 +10,31 @@ ScreenGui.Parent = ScPlayer
 ScreenGui.Name = 'Painel Login'
 ScreenGui.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
 local SoundServiceNegado = Instance.new('Sound')
-SoundServiceNegado.SoundId = 'rbxassetid://117707413130343'
+SoundServiceNegado.SoundId = 'rbxassetid://89732586057985'
 SoundServiceNegado.Volume = 0.5
 SoundServiceNegado.Parent = ScreenGui
+local SoundServiceConexPerdida = Instance.new('Sound')
+SoundServiceConexPerdida.SoundId = 'rbxassetid://72215227505632'
+SoundServiceConexPerdida.Volume = 0.5
+SoundServiceConexPerdida.Parent = ScreenGui
+local SoundAutoRequire = Instance.new('Sound')
+SoundAutoRequire.SoundId = 'rbxassetid://137991366433100'
+SoundAutoRequire.Volume = 0.5
+SoundAutoRequire.Parent = ScreenGui
+local SoundReject = Instance.new('Sound')
+SoundReject.SoundId = 'rbxassetid://121445890268956'
+SoundReject.Volume = 0.5
+SoundReject.Parent = ScreenGui
+local SoundAcept = Instance.new('Sound')
+SoundAcept.SoundId = 'rbxassetid://137995606275627'
+SoundAcept.Volume = 0.5
+SoundAcept.Parent = ScreenGui
+local SoundInvalidPass = Instance.new('Sound')
+SoundInvalidPass.SoundId = 'rbxassetid://89732586057985'
+SoundInvalidPass.Volume = 0.5
+SoundInvalidPass.Parent = ScreenGui
+
+
 
 local ColorPadron = Color3.new(0.333333, 0, 1)
 
@@ -107,20 +129,29 @@ ButtonPN1.MouseButton1Click:Connect(function()
 	local StarterGui = game:GetService("StarterGui")
 	if TextBox1.Text == User1 and TextBox2.Text == Pass1  then
 		print('Success')
+		SoundAcept:Play()
 		StarterGui:SetCore("SendNotification", {
 			Title = "Warning!",
 			Text = "Thank you for using Zyntra :)",
 			Duration = 5
 		})
 		LoginOn = true
-	elseif TextBox1.Text == '' or TextBox2.Text == ''  then
-		SoundServiceNegado:Play()
+	elseif TextBox1.Text == '' or TextBox2.Text == '' or TextBox1.Text == 'User' or TextBox2.Text == 'Pass'  then
+		SoundReject:Play()
 		StarterGui:SetCore("SendNotification", {
 			Title = "Warning!",
 			Text = "It looks like one of the fields is empty!",
 			Duration = 5
 		})
+	elseif (TextBox1.Text == User1 and TextBox1.Text ~= Pass1) or TextBox1.Text == '' or TextBox1.Text == 'Pass'  then
+		SoundInvalidPass:Play()
+		StarterGui:SetCore("SendNotification", {
+			Title = "Warning!",
+			Text = "Incorrect Password!",
+			Duration = 5
+		})
 	else
+		SoundServiceConexPerdida:Play()
 		StarterGui:SetCore("SendNotification", {
 			Title = "Warning!",
 			Text = "Incorrect username or password!",
@@ -170,4 +201,5 @@ while LoginOn==false do
 	wait(1)
 end
 
+wait(0.5)
 ScreenGui:Destroy()
